@@ -1,6 +1,11 @@
 package com.teamTwo;
 
 public class Ticket {
-  int trainNo;
+  private int trainNo;
+  private String trainName;
+  private String source;
+  private String destination;
+  private double ticketPrice;
+
 
 }
