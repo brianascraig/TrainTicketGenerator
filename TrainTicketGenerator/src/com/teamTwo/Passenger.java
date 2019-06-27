@@ -39,11 +39,11 @@ public class Passenger implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-//        if(this.getName().equalsIgnoreCase(((Passenger)o).getName()) &&
-//                this.getAge() == ((Passenger)o).getAge() &&
-//                this.getGender() == ((Passenger)o).getGender())
-//            return 0;
-//        else
+       if(this.getName().equalsIgnoreCase(((Passenger)o).getName()) &&
+                this.getAge() == ((Passenger)o).getAge() &&
+               this.getGender() == ((Passenger)o).getGender())
+                return 0;
+       else
         return 1;
     }
 }
