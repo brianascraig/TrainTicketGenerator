@@ -13,7 +13,8 @@ public class TicketApplication {
 		Scanner scr = new Scanner(System.in);
 
 		try {
-
+//// Enter train number needs to be pn top
+			// if you enter a date before current date there needs to be an excpetion message
 			System.out.println("Enter travel Date");
 			String dateStr = scr.nextLine();
 			System.out.println("Entered Date is " + dateStr);

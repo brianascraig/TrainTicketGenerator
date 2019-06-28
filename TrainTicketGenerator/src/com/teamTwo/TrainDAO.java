@@ -28,7 +28,7 @@ public class TrainDAO {
             con = getConnection(url1,"hr","hr");
             String query1="select * from TRAINS where TRAIN_NO = ? ";
             pstmt = con.prepareStatement(query1);
-            //In the following statement 1st argument represent the
+            // TODO In the following statement 1st argument represent the
             // parameter number mentioned in the above statement with ?
             pstmt.setInt(1, trainNo);
             rs = pstmt.executeQuery();
