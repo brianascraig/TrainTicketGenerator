@@ -1,6 +1,6 @@
 package com.teamTwo;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -83,22 +83,23 @@ public class Ticket {
     private StringBuilder generateTicket() {
         StringBuilder ticketStr = new StringBuilder();
 
-        ticketStr.append("PNR : " + this.getPnr() + "\n");
-        ticketStr.append("Train no : " + this.getTrain().getTrainNo() + "\n");
-        ticketStr.append("Train Name : " + this.getTrain().getTrainName() + "\n");
-        ticketStr.append("From : " + this.getTrain().getSource() + "\n");
-        ticketStr.append("To : " + this.getTrain().getDestination() + "\n");
-        ticketStr.append("Travel Date : " + this.getTravelDate() + "\n");
+        ticketStr.append("PNR \t\t\t: " + this.getPnr() + "\n");
+        ticketStr.append("Train no \t\t: " + this.getTrain().getTrainNo() + "\n");
+        ticketStr.append("Train Name \t: " + this.getTrain().getTrainName() + "\n");
+        ticketStr.append("From \t\t\t: " + this.getTrain().getSource() + "\n");
+        ticketStr.append("To \t\t\t: " + this.getTrain().getDestination() + "\n");
+        ticketStr.append("Travel Date \t: " + this.getTravelDate() + "\n\n");
+        ticketStr.append("------------------------------------------------------------");
         ticketStr.append("Passengers : \n");
-        ticketStr.append("Name              Age                 Gender          Fare\n");
+        ticketStr.append("Name\t\t\tAge\tGender\tFare\n");
 
         for(Passenger psngr : passengers.keySet()) {
             Integer fare = (Integer) passengers.get(psngr);
 
-            ticketStr.append(psngr.getName() +"         " + psngr.getAge() + "              " + psngr.getGender() + "           " + fare + "\n");
+            ticketStr.append(psngr.getName() +"\t\t\t" + psngr.getAge() +"\t"+ psngr.getGender() + "\t\t" + fare + "\n");
 
         }
-
+        ticketStr.append("------------------------------------------------------------");
         ticketStr.append("Total Price: " + this.calculateTotalTicketPrice());
 
         return ticketStr;
@@ -107,8 +108,16 @@ public class Ticket {
     public void writeTicket() {
         String fileName = generatePNR();
         FileOutputStream fos = null;
+        String PATH = "C:\\Tickets\\booking";
         try {
-            fos = new FileOutputStream("C:\\swapna\\booking\\" + fileName + ".txt");
+
+            File directory = new File(PATH);
+            if (! directory.exists()){
+                directory.mkdirs();
+                // If you require it to make the entire directory path including parents,
+                // use directory.mkdirs(); here instead.
+            }
+            fos = new FileOutputStream(PATH + File.separator + fileName + ".txt");
             fos.write(generateTicket().toString().getBytes());
             fos.flush();
             fos.close();
