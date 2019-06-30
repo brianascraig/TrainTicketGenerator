@@ -80,7 +80,6 @@ class getTicketInfo{
 
 			System.out.println("Enter Gender");
 			char gender = psngrScanner.next().charAt(0);
-
 			ticket.addPassenger(name, age, gender);//adding passenger to the ticket object
 		}
 		ticket.writeTicket();
