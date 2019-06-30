@@ -3,6 +3,7 @@ package com.teamTwo;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -45,6 +46,7 @@ class getTicketInfo{
 
 	public void getTravelDate() throws InvalidDateException{
 
+		try {
 			System.out.println("Enter travel Date:");
 			System.out.println("Enter the month");
 			int month = scr.nextInt();
@@ -55,14 +57,17 @@ class getTicketInfo{
 			String dateStr = day + "-" + month + "-" + year;
 			System.out.println("Entered Date is " + dateStr);
 			LocalDate now = LocalDate.now();
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-			String formattedDate = now.format(formatter);
-			travelDate = LocalDate.parse(formattedDate, formatter);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-M-yyyy");
+			//String formattedDate = now.format(formatter);
+			travelDate = LocalDate.parse(dateStr, formatter);
 			if (travelDate.isBefore(now)) {
 				throw new InvalidDateException("Date entered is before the current date ....");
 			}
 
-		    ticket = new Ticket(travelDate, trn);
+			ticket = new Ticket(travelDate, trn);
+		} catch (DateTimeParseException e) {
+			throw new InvalidDateException("Not a Valid Date");
+		}
 
 	}
 
@@ -93,9 +98,13 @@ public class TicketApplication {
 
 	public static void main(String[] args) throws InvalidDateException {
 	getTicketInfo gti = new getTicketInfo();
-	gti.getTrainNo();
-	gti.getTravelDate();
-	gti.getPassengrs();
+		try {
+			gti.getTrainNo();
+			gti.getTravelDate();
+			gti.getPassengrs();
+		} catch (InvalidDateException e) {
+			System.out.println(e.getMessage());
+		}
 
 
 //
