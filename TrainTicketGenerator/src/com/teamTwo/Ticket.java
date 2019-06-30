@@ -42,7 +42,7 @@ public class Ticket {
         } else if (psngrObj.getAge() >= 60) {
             return train.getTicketPrice() * 0.6;
         } else if (psngrObj.getGender() == 'F') {
-            return train.getTicketPrice() * 0.25;
+            return train.getTicketPrice() * 0.75;
         }else{
             return train.getTicketPrice();
         }
