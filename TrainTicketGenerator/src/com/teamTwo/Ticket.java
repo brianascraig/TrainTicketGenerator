@@ -3,18 +3,18 @@ package com.teamTwo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.TreeMap;
 
 public class Ticket {
     private static int counter = 100;
     private String pnr;
-    private Date travelDate;
+    private LocalDate travelDate;
     private Train train;
     private TreeMap<Passenger, Integer> passengers;
 
-    public Ticket(Date travelDate, Train train) {
+    public Ticket(LocalDate travelDate, Train train) {
         this.travelDate = travelDate;
         this.train = train;
         this.passengers = new TreeMap<Passenger, Integer>();
@@ -26,8 +26,8 @@ public class Ticket {
         pnr.append(this.train.getSource().substring(0,1));
         pnr.append(this.train.getDestination().substring(0,1) + "_");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        pnr.append(sdf.format(this.getTravelDate()) + "_");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        pnr.append( this.getTravelDate().format(formatter) + "_");
         pnr.append(this.getCounter());
 
         this.setPnr(pnr.toString());
@@ -143,11 +143,11 @@ public class Ticket {
         this.pnr = pnr;
     }
 
-    public Date getTravelDate() {
+    public LocalDate getTravelDate() {
         return travelDate;
     }
 
-    public void setTravelDate(Date travelDate) {
+    public void setTravelDate(LocalDate travelDate) {
         this.travelDate = travelDate;
     }
 

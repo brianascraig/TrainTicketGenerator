@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -25,10 +24,10 @@ class InvalidDateException extends Exception {
 class getTicketInfo{
 	Scanner scr = new Scanner(System.in);
 	Calendar currDate = Calendar.getInstance();
-	Date travelDate;
+	LocalDate travelDate;
 	Train trn;
 //	SwingCalendar sc = new SwingCalendar();
-	Ticket ticket = new Ticket(travelDate, trn);//creating ticket object here with train and date
+	Ticket ticket ;//creating ticket object here with train and date
 
 	public void getTrainNo() {
 		try {
@@ -58,10 +57,12 @@ class getTicketInfo{
 			LocalDate now = LocalDate.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 			String formattedDate = now.format(formatter);
-			LocalDate travelDate = LocalDate.parse(formattedDate, formatter);
+			travelDate = LocalDate.parse(formattedDate, formatter);
 			if (travelDate.isBefore(now)) {
 				throw new InvalidDateException("Date entered is before the current date ....");
 			}
+
+		    ticket = new Ticket(travelDate, trn);
 
 	}
 
